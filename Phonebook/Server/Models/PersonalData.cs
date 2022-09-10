@@ -2,8 +2,8 @@
 {
     public class PersonalData
     {
-        public int PersonalDataId { get; set; }
-        public string oib { get; set; } = null!;
+        public int Id { get; set; }
+        public string Oib { get; set; } = null!;
    
 
         public int PersonID { get; set; }   

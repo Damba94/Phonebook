@@ -4,58 +4,57 @@
 
 namespace Phonebook.Server.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "cities",
+                name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
-                    pozivni = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Pozivni = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_cities", x => x.Id);
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "persons",
+                name: "Persons",
                 columns: table => new
                 {
-                    Personid = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    lastname = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_persons", x => x.Personid);
+                    table.PrimaryKey("PK_Persons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "addresses",
+                name: "Addresses",
                 columns: table => new
                 {
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StreetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
-                    PersonId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_addresses", x => x.AddressId);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_addresses_cities_CityId",
+                        name: "FK_Addresses_Cities_CityId",
                         column: x => x.CityId,
-                        principalTable: "cities",
+                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -64,19 +63,19 @@ namespace Phonebook.Server.Migrations
                 name: "PersonalDatas",
                 columns: table => new
                 {
-                    PersonalDataId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    oib = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Oib = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PersonID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersonalDatas", x => x.PersonalDataId);
+                    table.PrimaryKey("PK_PersonalDatas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PersonalDatas_persons_PersonID",
+                        name: "FK_PersonalDatas_Persons_PersonID",
                         column: x => x.PersonID,
-                        principalTable: "persons",
-                        principalColumn: "Personid",
+                        principalTable: "Persons",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -84,35 +83,35 @@ namespace Phonebook.Server.Migrations
                 name: "AddressPerson",
                 columns: table => new
                 {
-                    AddressesAddressId = table.Column<int>(type: "int", nullable: false),
-                    PersonsPersonid = table.Column<int>(type: "int", nullable: false)
+                    AddressesId = table.Column<int>(type: "int", nullable: false),
+                    PersonsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AddressPerson", x => new { x.AddressesAddressId, x.PersonsPersonid });
+                    table.PrimaryKey("PK_AddressPerson", x => new { x.AddressesId, x.PersonsId });
                     table.ForeignKey(
-                        name: "FK_AddressPerson_addresses_AddressesAddressId",
-                        column: x => x.AddressesAddressId,
-                        principalTable: "addresses",
-                        principalColumn: "AddressId",
+                        name: "FK_AddressPerson_Addresses_AddressesId",
+                        column: x => x.AddressesId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AddressPerson_persons_PersonsPersonid",
-                        column: x => x.PersonsPersonid,
-                        principalTable: "persons",
-                        principalColumn: "Personid",
+                        name: "FK_AddressPerson_Persons_PersonsId",
+                        column: x => x.PersonsId,
+                        principalTable: "Persons",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_addresses_CityId",
-                table: "addresses",
+                name: "IX_Addresses_CityId",
+                table: "Addresses",
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddressPerson_PersonsPersonid",
+                name: "IX_AddressPerson_PersonsId",
                 table: "AddressPerson",
-                column: "PersonsPersonid");
+                column: "PersonsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PersonalDatas_PersonID",
@@ -130,13 +129,13 @@ namespace Phonebook.Server.Migrations
                 name: "PersonalDatas");
 
             migrationBuilder.DropTable(
-                name: "addresses");
+                name: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "persons");
+                name: "Persons");
 
             migrationBuilder.DropTable(
-                name: "cities");
+                name: "Cities");
         }
     }
 }

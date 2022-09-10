@@ -9,10 +9,11 @@ namespace Phonebook.Server.Data
         public PhonebookContext(DbContextOptions<PhonebookContext> options) : base(options)
         {
         }
-        public DbSet<Address> addresses { get; set; } = null!;
-        public DbSet<Person> persons { get; set; } = null!;
-        public DbSet<City> cities { get; set; } = null!;
+        public DbSet<Address> Addresses { get; set; } = null!;
+        public DbSet<Person> Persons { get; set; } = null!;
+        public DbSet<City> Cities { get; set; } = null!;
         public DbSet<PersonalData> PersonalDatas { get; set; } = null!;
+        public DbSet<Admin> Admins { get; set; } = null!;   
 
  
     }

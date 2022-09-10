@@ -11,8 +11,8 @@ using Phonebook.Server.Data;
 namespace Phonebook.Server.Migrations
 {
     [DbContext(typeof(PhonebookContext))]
-    [Migration("20220721171656_Fixdb")]
-    partial class Fixdb
+    [Migration("20220910151644_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,33 +25,29 @@ namespace Phonebook.Server.Migrations
 
             modelBuilder.Entity("AddressPerson", b =>
                 {
-                    b.Property<int>("AddressesAddressId")
+                    b.Property<int>("AddressesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PersonsPersonid")
+                    b.Property<int>("PersonsId")
                         .HasColumnType("int");
 
-                    b.HasKey("AddressesAddressId", "PersonsPersonid");
+                    b.HasKey("AddressesId", "PersonsId");
 
-                    b.HasIndex("PersonsPersonid");
+                    b.HasIndex("PersonsId");
 
                     b.ToTable("AddressPerson");
                 });
 
             modelBuilder.Entity("Phonebook.Server.Models.Address", b =>
                 {
-                    b.Property<int>("AddressId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AddressId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PhoneNumber")
                         .HasColumnType("int");
@@ -63,11 +59,11 @@ namespace Phonebook.Server.Migrations
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.HasKey("AddressId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("addresses");
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Phonebook.Server.Models.City", b =>
@@ -82,55 +78,55 @@ namespace Phonebook.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Pozivni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.Property<string>("pozivni")
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Phonebook.Server.Models.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("cities");
-                });
-
-            modelBuilder.Entity("Phonebook.Server.Models.Person", b =>
-                {
-                    b.Property<int>("Personid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Personid"), 1L, 1);
-
-                    b.Property<string>("lastname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Personid");
-
-                    b.ToTable("persons");
+                    b.ToTable("Persons");
                 });
 
             modelBuilder.Entity("Phonebook.Server.Models.PersonalData", b =>
                 {
-                    b.Property<int>("PersonalDataId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PersonalDataId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Oib")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonID")
                         .HasColumnType("int");
 
-                    b.Property<string>("oib")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PersonalDataId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PersonID")
                         .IsUnique();
@@ -142,13 +138,13 @@ namespace Phonebook.Server.Migrations
                 {
                     b.HasOne("Phonebook.Server.Models.Address", null)
                         .WithMany()
-                        .HasForeignKey("AddressesAddressId")
+                        .HasForeignKey("AddressesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Phonebook.Server.Models.Person", null)
                         .WithMany()
-                        .HasForeignKey("PersonsPersonid")
+                        .HasForeignKey("PersonsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
