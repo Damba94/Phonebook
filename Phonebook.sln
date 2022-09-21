@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Server", "Phonebook\Server\Phonebook.Server.csproj", "{12E55BF9-DAE6-4856-A8F6-879374A534ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook.Server", "Phonebook\Server\Phonebook.Server.csproj", "{12E55BF9-DAE6-4856-A8F6-879374A534ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Client", "Phonebook\Client\Phonebook.Client.csproj", "{D3AB5229-B1FB-4071-942D-F8F99D26CAD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook.Client", "Phonebook\Client\Phonebook.Client.csproj", "{D3AB5229-B1FB-4071-942D-F8F99D26CAD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Phonebook.Shared", "Phonebook\Shared\Phonebook.Shared.csproj", "{74533E53-1B62-4B54-AB05-E0D62440984B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Phonebook.Shared", "Phonebook\Shared\Phonebook.Shared.csproj", "{74533E53-1B62-4B54-AB05-E0D62440984B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

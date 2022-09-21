@@ -1,0 +1,41 @@
+﻿@page "/Admin/Index"
+@inject HttpClient Http
+<h3>Index</h3>
+
+<br />
+<a class='btn btn-primary btn-sm' href='Admin/AddNewPerson'>Dodaj osobu</a>
+<table>
+    <thead>    
+        <tr>
+            <th>Ime</th>
+            <th>Adresae</th>
+            <th>Grad</th>
+            <th>Pozivni</th>
+            <th>Broj</th>
+
+            <th>Upravljaj</th>
+
+        </tr>
+     </thead>
+     <tbody> @*    @foreach(var item in Model.TransactionList){
+             <tr>
+                 <td>@item.id</td>
+                 <td>@item.name1</td>
+                 <td>@item.lastname1</td>
+                 <td>@item.iban1</td>
+                 <td>@item.name2</td>
+                 <td>@item.lastname2</td>
+                 <td>@item.iban2</td>
+                 <td>@item.amount</td>
+                 <td>
+                     <td><a class="btn btn-primary btn-sm" href="/Transactions/Edit?id=@item.id">Edit</a></td>
+                     <td><a class="btn btn-primary btn-sm" href="/Transactions/Delete?id=@item.id">DElete</a></td>
+                 </td>
+             </tr>
+         }*@  
+     </tbody>
+
+</table>
+@code{
+
+}
