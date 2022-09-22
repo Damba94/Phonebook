@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using Phonebook.Server.Models
-@inject HttpClient Http
+@inject IPersonService PersonService
 
 
 <PageTitle>Telefonski imenik</PageTitle>
@@ -16,20 +16,20 @@
         </tr>
     </thead>
     <tbody>
-           @foreach(var item in People){
+           @foreach(var item in PersonService.Persons){
         <tr>
         <td>@item.Name</td>
         <td>@item.LastName</td>
-        <td><a href="/" class="button">Go to Google</a></td>
+        <td><a href="/Home/PersonDetails/{@item.Id}" class="button">Detalji</a></td>
         </tr>
            }
     </tbody>
 
 </table>
 @code{
-    private static List<Person>People { get; set; } = new List<Person>();
+
     protected override async Task OnInitializedAsync()
     {
-        People = await Http.GetFromJsonAsync<List<Person>>("api/ListPeople");
+        await PersonService.GetPersons();
     }
 }

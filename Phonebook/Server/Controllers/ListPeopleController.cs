@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Phonebook.Server.Data;
 using Phonebook.Server.Models;
+using Phonebook.Server.Services.PersonServices;
+using Phonebook.Shared;
 
 namespace Phonebook.Server.Controllers
 {
@@ -10,17 +12,19 @@ namespace Phonebook.Server.Controllers
     [ApiController]
     public class ListPeopleController : ControllerBase
     {
-        private readonly PhonebookContext _context;
 
-        public ListPeopleController(PhonebookContext context)
+        private readonly IPersonService _personService;
+
+        public ListPeopleController(IPersonService personService)
         {
-            _context=context;
+
+            _personService=personService;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Person>>> GetPeoples()
+        public async Task<ActionResult<ServiceResponse<List<Person>>>> GetPersons()
         {
-            var people = await _context.Persons.ToListAsync();
-            return Ok(people);
+            var response = await _personService.GetPersons();
+            return Ok(response);
         }
     };
 }

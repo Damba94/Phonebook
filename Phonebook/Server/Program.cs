@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Phonebook.Server.Data;
+using Phonebook.Server.Services.PersonServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<PhonebookContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IPersonService,PersonService>(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
