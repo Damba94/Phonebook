@@ -15,7 +15,9 @@ namespace Phonebook.Server.Models
 
         public City City { get; set; } = null!;
 
-
-
+        public static implicit operator List<object>(Address v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
