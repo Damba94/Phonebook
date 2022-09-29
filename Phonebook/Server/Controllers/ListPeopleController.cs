@@ -26,5 +26,12 @@ namespace Phonebook.Server.Controllers
             var response = await _personService.GetPersons();
             return Ok(response);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<Person>>>> GetPersonsbyId(int id)
+        {
+            var response=await _personService.GetPersonsbyId(id);   
+            return Ok(response);
+        }
     };
 }
