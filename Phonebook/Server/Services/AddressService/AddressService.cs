@@ -17,6 +17,22 @@ namespace Phonebook.Server.Services.AddressService
             _context=context;
         }
 
+        public async Task<ServiceResponse<List<Address>>> GetAddresses()
+        {
+            var response = new ServiceResponse<List<Address>>();
+            var adresses = await  _context.Addresses.ToListAsync();
+            if (adresses == null)
+            {
+                response.Success = false;
+                response.Message = "Nema podataka";
+            }
+            else
+            {
+                response.Data = adresses;
+            }
+            return response;
+
+        }
 
         public async Task<ServiceResponse<List<Address>>> GetAddressesbyId(int id)
         {

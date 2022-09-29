@@ -16,6 +16,12 @@ namespace Phonebook.Server.Controllers
         {
             _addressService = addressService;    
         }
+        [HttpGet]
+        public async Task<ActionResult<ServiceResponse<List<Address>>>> GetAddresses()
+        {
+            var response = await _addressService.GetAddresses();
+            return Ok(response);
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<List<Address>>>> GetAddressesbyId(int id)
         {
