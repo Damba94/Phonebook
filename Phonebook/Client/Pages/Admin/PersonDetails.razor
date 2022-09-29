@@ -1,0 +1,39 @@
+﻿@page "/Admin/PersonDetails/{Id:int}"
+@using Phonebook.Client.Services.AddressService
+@inject IAddressSrvice AddressService
+
+
+<h3>PersonDetails</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Adrese</th>
+            <th>Broj telefona</th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in AddressService.Addresses)
+        {
+            <tr>
+                <td>@item.StreetName</td>
+                <td>@item.PhoneNumber</td>
+                
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@code {
+    private string message;
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync(){
+        var result = await AddressService.GetAddressesbyId(Id);
+    }
+
+}

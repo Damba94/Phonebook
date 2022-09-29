@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Home\Details.razor" />
     <Content Remove="Pages\Home\PersonDetails.razor" />
   </ItemGroup>
 
@@ -24,11 +25,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Home\Details.razor" />
     <_ContentIncludedByDefault Remove="Pages\Home\PersonDetails.razor" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Home\PersonDetails.razor" />
+    <None Include="Pages\Home\Details.razor" />
+    <None Include="Pages\Admin\PersonDetails.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Home\Details.razor" />
   </ItemGroup>
 
 </Project>

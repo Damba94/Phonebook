@@ -1,5 +1,5 @@
 ﻿@page "/"
-@using Phonebook.Server.Models
+
 @inject IPersonService PersonService
 
 
@@ -20,7 +20,7 @@
         <tr>
         <td>@item.Name</td>
         <td>@item.LastName</td>
-        <td><a href="/Home/PersonDetails/{@item.Id}" class="button">Detalji</a></td>
+        <td><a href="/PersonDetails/{@item.Id}" class="button">Detalji</a></td>
         </tr>
            }
     </tbody>
